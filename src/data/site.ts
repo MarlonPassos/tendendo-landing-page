@@ -1,7 +1,7 @@
 export const site = {
   url: new URL(process.env.SITE_URL || 'https://tendendo.com'),
   email: process.env.CONTACT_EMAIL || 'tendendo.oficial@gmail.com',
-  facebook: process.env.FACEBOOK_URL,
+  facebook: process.env.FACEBOOK_URL || 'https://www.facebook.com/tendendo',
   title: 'Tendendo | Tendências, novidades e grupos de ofertas no WhatsApp',
   description: 'Descubra tendências, novidades e ofertas de tecnologia, casa, esportes e mais. Participe gratuitamente dos grupos de WhatsApp do Tendendo.',
 };
