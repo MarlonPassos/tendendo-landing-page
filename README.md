@@ -26,7 +26,7 @@ Os testes verificam o HTML exportado, as páginas institucionais e os cinco conv
 ## Conteúdo e configuração
 
 - Edite `src/data/groups.ts` para alterar os cards e os convites. Troque `inviteUrl` para substituir um convite, ajuste `order` para reordenar ou use `enabled: false` para ocultar temporariamente um grupo. Reconstrua a página após cada mudança.
-- Defina `SITE_URL` com a origem HTTPS de produção. Ela alimenta os links canônicos, as imagens sociais e o sitemap. `CONTACT_EMAIL` configura o contato. O link “Página Tendendo” só aparece se `FACEBOOK_URL` estiver preenchida.
+- Defina `SITE_URL` com a origem HTTPS de produção. Ela alimenta os links canônicos, as imagens sociais e o sitemap. `CONTACT_EMAIL` configura o contato. O link “Tendendo no Facebook” usa a página oficial por padrão. Para trocar o endereço, configure `FACEBOOK_URL`.
 - Edite as minutas em `src/app/[pagina]/page.tsx` e revise os textos jurídicos antes da publicação. Confira também os convites no WhatsApp com uma conta apropriada.
 - Os arquivos em `public/assets/` são derivações rasterizadas dos materiais entregues em `docs/tendendo_assets/`.
 
