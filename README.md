@@ -1,6 +1,6 @@
 # Tendendo
 
-Landing page em Next.js (App Router), TypeScript e CSS. O build exporta a home, as páginas institucionais, o sitemap e o robots.txt para `out/`. Em produção, o Nginx serve os arquivos estáticos.
+Landing page em Next.js (App Router), TypeScript e CSS. O build exporta a home, as páginas institucionais, o sitemap e o robots.txt para `out/`. O Cloudflare Pages ou o Nginx pode servir os arquivos estáticos.
 
 ## Desenvolvimento e validação
 
@@ -47,6 +47,24 @@ O Meta Pixel fica desativado por padrão. Para disponibilizá-lo, preencha `NEXT
 A camada DOM também é o ponto de integração para GA4. Qualquer adaptador futuro deve obedecer ao consentimento e evitar duplicação. A medição conta visualizações e cliques. A entrada efetiva no grupo requer confirmação independente.
 
 Uma futura rota `/entrar/:slug` com resposta HTTP 302/307 e atualização de convites sem rebuild exigiria serviço próprio ou configuração consultada dinamicamente. A troca manual no arquivo mantém a operação estática.
+
+## Cloudflare Pages pelo GitHub
+
+Importe `MarlonPassos/tendendo-landing-page` em **Workers & Pages → Pages → Import an existing Git repository** e configure o projeto com estes valores:
+
+| Campo | Valor |
+| --- | --- |
+| Framework preset | Next.js (Static HTML Export) |
+| Production branch | `main` |
+| Build command | `npx next build` |
+| Build output directory | `out` |
+| Root directory | Raiz do repositório |
+
+O arquivo `.node-version` seleciona Node.js 24 no build. Use as variáveis de build de `.env.example` conforme necessário. Defina `SITE_URL` com a origem HTTPS pública para que os links canônicos e o sitemap apontem para o domínio correto. `TENDENDO_PORT` é usada pelo Docker Compose.
+
+O Next.js já declara `output: 'export'` em `next.config.ts`. Os logotipos e imagens são servidos diretamente de `public/assets/`. Com a integração do GitHub habilitada, alterações na branch `main` acionam o deploy de produção.
+
+[Guia de exportação estática do Next.js no Cloudflare Pages](https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/)
 
 ## Docker. Deploy e atualização
 
