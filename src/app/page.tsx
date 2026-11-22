@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ClickEvents } from '../components/ClickEvents';
+import { LandingInteractions } from '../components/LandingInteractions';
 import { Header } from '../components/Shell';
 import { Icon } from '../components/Icon';
 import { groups, type Group } from '../data/groups';
@@ -27,12 +27,11 @@ function Hero() {
     <section className="hero" aria-labelledby="hero-title">
       <div className="wrap hero-inner">
         <div className="hero-copy">
-          <p className="eyebrow">Tendências <span>•</span> Ofertas <span>•</span> Em alta</p>
-          <h1 id="hero-title">Descubra o que está em alta. <em>Aproveite as melhores oportunidades.</em></h1>
-          <p>Tecnologia, produtos para casa, esportes, materiais escolares e muito mais. No Tendendo, você encontra tendências, novidades e ofertas selecionadas de lojas como Amazon, Shopee e Mercado Livre.</p>
-          <p>Entre gratuitamente nos nossos grupos de WhatsApp e acompanhe as oportunidades que combinam com você.</p>
-          <div className="actions">
-            <a className="button primary" href="#grupos">Explorar grupos de ofertas</a>
+          <h1 id="hero-title">Ofertas e achadinhos direto no seu WhatsApp. <em>Grátis!</em></h1>
+          <p>Descubra tendências, novidades, cupons e oportunidades de lojas como Amazon, Shopee e Mercado Livre.</p>
+          <p>Escolha os assuntos que mais combinam com você e participe gratuitamente dos nossos grupos de ofertas.</p>
+          <div className="actions" data-dock-hide>
+            <a className="button primary" href="#grupos" data-analytics="hero_cta_click">Explorar grupos grátis</a>
             <a className="button secondary" href="#sobre">Conhecer o Tendendo</a>
           </div>
         </div>
@@ -49,14 +48,15 @@ function Hero() {
 
 function GroupCard({ group }: { group: Group }) {
   return (
-    <li className={`group-card ${group.icon === 'flame' ? 'featured' : ''}`}>
+    <li id={`grupo-${group.category}`} data-category={group.category} data-group={group.id} tabIndex={-1}
+      className={`group-card ${group.icon === 'flame' ? 'featured' : ''}`}>
       <span className="icon-tile"><Icon name={group.icon} /></span>
       <h3>{group.name}</h3>
       <p>{group.description}</p>
-      <a className="button whatsapp" data-group-id={group.id} href={group.inviteUrl}
+      <a className="button whatsapp" data-group-id={group.id} data-group-name={group.name} href={group.inviteUrl}
         target="_blank" rel="noopener noreferrer">
         <Icon name="whatsapp" />
-        <span>{group.cta}<span className="sr-only"> (WhatsApp, abre em nova aba)</span></span>
+        <span>Entrar grátis<span className="sr-only"> em {group.name} (WhatsApp, abre em nova aba)</span></span>
       </a>
     </li>
   );
@@ -69,13 +69,13 @@ export default function Home() {
       <Header home />
       <main id="conteudo">
         <Hero />
-        <section className="wrap section" id="grupos" aria-labelledby="groups-title">
+        <section className="wrap section" id="grupos" tabIndex={-1} aria-labelledby="groups-title">
           <p className="eyebrow">Grupos no WhatsApp</p>
           <h2 id="groups-title">Escolha os assuntos que mais combinam com você</h2>
-          <p className="intro">Participe gratuitamente de um ou mais grupos e acompanhe as novidades de acordo com seus interesses.</p>
+          <p className="intro">Grupos gratuitos. Escolha seus assuntos favoritos e saia quando quiser.</p>
           {enabledGroups.length ? (
             <>
-              <ul className="group-grid">{enabledGroups.map(group => <GroupCard group={group} key={group.id} />)}</ul>
+              <ul className="group-grid" data-dock-hide>{enabledGroups.map(group => <GroupCard group={group} key={group.id} />)}</ul>
               <p className="privacy-note"><Icon name="info" /><span>Os convites abrem o WhatsApp em nova aba. {whatsappPrivacy}</span></p>
             </>
           ) : <p>Os convites estão temporariamente indisponíveis.</p>}
@@ -113,11 +113,11 @@ export default function Home() {
           <div className="final-cta">
             <h2 id="final-title">As próximas oportunidades podem estar a um clique de distância.</h2>
             <p>Faça parte da comunidade Tendendo e acompanhe as tendências e ofertas dos assuntos que você mais gosta.</p>
-            <a className="button whatsapp" href="#grupos"><Icon name="whatsapp" />Escolher meu grupo no WhatsApp</a>
+            <a className="button whatsapp" href="#grupos" data-analytics="final_cta_click" data-dock-hide><Icon name="whatsapp" />Escolher meu grupo no WhatsApp</a>
             <p className="signoff">Tendendo — Descubra. Acompanhe. Aproveite.</p>
           </div>
         </section>
-        <ClickEvents />
+        <LandingInteractions hasGroups={enabledGroups.length > 0} />
       </main>
     </>
   );

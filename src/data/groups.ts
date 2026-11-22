@@ -4,10 +4,9 @@ export interface Group {
   description: string;
   icon: 'flame' | 'laptop' | 'fitness' | 'book' | 'home';
   inviteUrl: `https://chat.whatsapp.com/${string}`;
-  cta: string;
+  category: string;
   enabled: boolean;
   order: number;
-  campaignTag?: string;
 }
 
 export const groups: Group[] = [
@@ -17,7 +16,7 @@ export const groups: Group[] = [
     description: 'Oportunidades de diferentes categorias: produtos populares, promoções, achados e novidades em um só lugar.',
     icon: 'flame',
     inviteUrl: 'https://chat.whatsapp.com/Hv6LSL0y0Z04ZODzvAlgPd',
-    cta: 'Entrar no Radar de Ofertas',
+    category: 'radar',
     enabled: true,
     order: 1,
   },
@@ -27,7 +26,7 @@ export const groups: Group[] = [
     description: 'Eletrônicos, acessórios, informática, gadgets e produtos inteligentes.',
     icon: 'laptop',
     inviteUrl: 'https://chat.whatsapp.com/CC4v27uoukuKeyEIAeOn57',
-    cta: 'Entrar no grupo de Tecnologia',
+    category: 'tecnologia',
     enabled: true,
     order: 2,
   },
@@ -37,7 +36,7 @@ export const groups: Group[] = [
     description: 'Esportes, exercícios, atividades físicas, acessórios esportivos e bem-estar.',
     icon: 'fitness',
     inviteUrl: 'https://chat.whatsapp.com/ECCm9RHJNF04smRSx66cC0',
-    cta: 'Entrar no grupo de Esportes e Fitness',
+    category: 'esportes',
     enabled: true,
     order: 3,
   },
@@ -47,7 +46,7 @@ export const groups: Group[] = [
     description: 'Materiais escolares, papelaria, recursos pedagógicos e organização dos estudos.',
     icon: 'book',
     inviteUrl: 'https://chat.whatsapp.com/BQNHvawkTSFF9JZKnppy7u',
-    cta: 'Entrar no grupo Escolar e Pedagógico',
+    category: 'escolar',
     enabled: true,
     order: 4,
   },
@@ -57,7 +56,7 @@ export const groups: Group[] = [
     description: 'Casa, decoração, cozinha, organização e utilidades domésticas.',
     icon: 'home',
     inviteUrl: 'https://chat.whatsapp.com/CygPqiCg21kFtgQZ7xB5LK',
-    cta: 'Entrar no grupo Casa e Estilo',
+    category: 'casa',
     enabled: true,
     order: 5,
   },

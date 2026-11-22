@@ -13,7 +13,11 @@ test('exporta a página completa e seus destinos internos', () => {
     assert.ok(html.includes(`id="${id}"`));
     assert.match(html, new RegExp(`href="/?#${id}"`));
   }
-  assert.equal([...html.matchAll(/href="#grupos"/g)].length, 4);
+  assert.equal([...html.matchAll(/href="#grupos"/g)].length, 5);
+  assert.match(html, /Ofertas e achadinhos direto no seu WhatsApp/);
+  assert.match(html, /data-analytics="hero_cta_click"/);
+  assert.match(html, /data-analytics="final_cta_click"/);
+  assert.match(html, /Ver grupos grátis/);
   for (const route of ['politica-de-privacidade', 'termos-de-uso', 'links-de-afiliados']) {
     assert.ok(html.includes(`href="/${route}/"`));
     assert.match(read(`${route}/index.html`), /revisão jurídica/);
@@ -31,6 +35,9 @@ test('exporta os cinco convites exatos com abertura segura', () => {
     ['escolar-e-pedagogico', 'BQNHvawkTSFF9JZKnppy7u'],
     ['casa-e-estilo', 'CygPqiCg21kFtgQZ7xB5LK'],
   ];
+  for (const category of ['radar', 'tecnologia', 'esportes', 'escolar', 'casa']) {
+    assert.ok(html.includes(`id="grupo-${category}"`));
+  }
   const links = [...html.matchAll(/<a\b[^>]*data-group-id="[^"]+"[^>]*>/g)].map(match => match[0]);
   assert.equal(links.length, expected.length);
   for (const [index, [id, invite]] of expected.entries()) {

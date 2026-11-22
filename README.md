@@ -16,6 +16,7 @@ Abra [localhost:3000](http://localhost:3000). Para validar a exportação de pro
 
 ```sh
 npm run lint
+npm run typecheck
 npm run build
 npm test
 ```
@@ -31,9 +32,19 @@ Os testes verificam o HTML exportado, as páginas institucionais e os cinco conv
 
 ## Campanhas
 
-As UTMs `utm_source`, `utm_medium`, `utm_campaign` e `utm_content` ficam na URL e em memória durante a visita. Use uma origem reconhecida (`facebook`, `instagram`, `meta`, `fb` ou `ig`) e, para emitir o nome da campanha, inclua o identificador em `NEXT_PUBLIC_ALLOWED_CAMPAIGNS`, separado por vírgulas.
+A página reconhece `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` e `fbclid`. Eles permanecem na URL durante a navegação por âncoras. Os convites mantêm suas URLs originais.
 
-O evento DOM `whatsapp_group_click` contém `group_id`, `timestamp` e, quando permitidos, `source` e `campaign`. Os convites recebem a URL original. A integração opcional com Meta Pixel ou Google Analytics deve configurar os IDs e carregar o SDK somente após o consentimento aplicável. O projeto vem com essas integrações desativadas e sem transmissão ou persistência dos eventos. Para medir CTR, registre impressões e cliques na mesma base de consentimento. O clique mede a abertura do convite, sem confirmar adesão.
+Para uma campanha específica, use `/?grupo=tecnologia`, `/?grupo=radar`, `/?grupo=casa`, `/?grupo=esportes` ou `/?grupo=escolar`. O grupo aparece destacado e recebe foco. Também é possível usar uma âncora como `/#grupo-tecnologia`.
+
+A camada DOM emite `page_view`, `group_click`, `hero_cta_click` e `final_cta_click` no objeto `window`. Para testar, inspecione `event.detail` com `window.addEventListener('group_click', console.log)`. No clique de grupo, o evento contém `group_id` e `group_name`. Os campos `source`, `medium` e `campaign` são incluídos quando reconhecidos.
+
+- Origens aceitas: `facebook`, `instagram`, `meta`, `fb` e `ig`.
+- Meios aceitos: `paid`, `paid_social`, `social`, `cpc` e `cpm`.
+- Para incluir nomes de campanhas, configure `NEXT_PUBLIC_ALLOWED_CAMPAIGNS` com valores separados por vírgula. Use identificadores sem dados pessoais.
+
+O Meta Pixel fica desativado por padrão. Para disponibilizá-lo, preencha `NEXT_PUBLIC_META_PIXEL_ID` com o ID numérico real e execute um novo build. O SDK só carrega após autorização em **Preferências de privacidade**, na página inicial. O visitante pode recusar ou revogar no mesmo lugar. Global Privacy Control e Do Not Track desativam o envio. Quando autorizado, o SDK da Meta pode processar a URL da página e cookies próprios conforme as políticas da Meta. Os eventos da aplicação não incluem `fbclid`, `utm_content`, `utm_term`, dados de contato ou o convite do WhatsApp.
+
+A camada DOM também é o ponto de integração para GA4. Qualquer adaptador futuro deve obedecer ao consentimento e evitar duplicação. A medição conta visualizações e cliques. A entrada efetiva no grupo requer confirmação independente.
 
 Uma futura rota `/entrar/:slug` com resposta HTTP 302/307 e atualização de convites sem rebuild exigiria serviço próprio ou configuração consultada dinamicamente. A troca manual no arquivo mantém a operação estática.
 

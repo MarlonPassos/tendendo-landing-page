@@ -17,7 +17,7 @@ export function Header({ home = false }: { home?: boolean }) {
           <a href={`${prefix}#como-funciona`}>Como funciona</a>
           <a href={`${prefix}#sobre`}>Sobre</a>
         </nav>
-        <a href={`${prefix}#grupos`} className="button header-cta">Explorar grupos</a>
+        <a href={`${prefix}#grupos`} className="button header-cta" data-dock-hide>Explorar grupos</a>
       </div>
     </header>
   );
@@ -25,7 +25,7 @@ export function Header({ home = false }: { home?: boolean }) {
 
 export function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" data-dock-hide>
       <div className="wrap footer-inner">
         <div>
           <a href="/" className="brand"><Logo /></a>

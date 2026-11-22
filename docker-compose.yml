@@ -7,6 +7,7 @@ services:
         CONTACT_EMAIL: ${CONTACT_EMAIL:-tendendo.oficial@gmail.com}
         FACEBOOK_URL: ${FACEBOOK_URL:-}
         NEXT_PUBLIC_ALLOWED_CAMPAIGNS: ${NEXT_PUBLIC_ALLOWED_CAMPAIGNS:-}
+        NEXT_PUBLIC_META_PIXEL_ID: ${NEXT_PUBLIC_META_PIXEL_ID:-}
     ports:
       - "${TENDENDO_PORT:-8080}:8080"
     restart: unless-stopped

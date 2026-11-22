@@ -6,7 +6,8 @@
     "test": "node --test",
     "dev": "next dev",
     "build": "next build",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "type": "module",
   "devDependencies": {

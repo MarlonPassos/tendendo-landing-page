@@ -5,7 +5,7 @@ import { affiliate, legalLinks, pricing, site, whatsappPrivacy } from '../../dat
 
 const pages = {
   'politica-de-privacidade': [
-    ['Navegação e campanhas', 'A página lê parâmetros de campanha da URL durante a visita. Ao clicar em um convite, ela prepara um evento local com o grupo, a data e, quando reconhecidas, a origem e a campanha. A configuração padrão não usa Meta Pixel, Google Analytics, cookies de publicidade ou envio desses eventos a terceiros.'],
+    ['Navegação e campanhas', 'A página lê os parâmetros da URL durante a visita. Os eventos locais registram visualizações e cliques, incluindo o grupo escolhido e a origem, o meio e a campanha reconhecidos. Um clique no convite não confirma a entrada no grupo. Quando a medição com a Meta está disponível, ela só é ativada após a sua autorização nas Preferências de privacidade da página inicial. O serviço da Meta pode processar cookies, a URL visitada e informações do navegador de acordo com suas políticas. Sua escolha fica salva no navegador e pode ser alterada na página inicial.'],
     ['WhatsApp e marketplaces', whatsappPrivacy + ' O WhatsApp e os marketplaces têm suas próprias políticas de privacidade.'],
     ['Contato', 'Ao entrar em contato por e-mail, você compartilha seu endereço e o conteúdo da mensagem para que possamos responder.'],
   ],
@@ -51,6 +51,9 @@ export default async function LegalPage({ params }: Props) {
         {pages[slug].map(([title, body]) => (
           <section key={title}><h2>{title}</h2><p>{body}</p></section>
         ))}
+        {slug === 'politica-de-privacidade' && /^\d+$/.test(process.env.NEXT_PUBLIC_META_PIXEL_ID || '') && (
+          <p><a href="/#preferencias-de-privacidade">Alterar preferências de privacidade</a></p>
+        )}
         <p>Dúvidas? <a href={`mailto:${site.email}`}>{site.email}</a></p>
       </main>
     </>
