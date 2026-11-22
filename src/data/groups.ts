@@ -1,0 +1,64 @@
+export interface Group {
+  id: string;
+  name: string;
+  description: string;
+  icon: 'flame' | 'laptop' | 'fitness' | 'book' | 'home';
+  inviteUrl: `https://chat.whatsapp.com/${string}`;
+  cta: string;
+  enabled: boolean;
+  order: number;
+  campaignTag?: string;
+}
+
+export const groups: Group[] = [
+  {
+    id: 'radar-de-ofertas',
+    name: 'Radar de Ofertas',
+    description: 'Oportunidades de diferentes categorias: produtos populares, promoções, achados e novidades em um só lugar.',
+    icon: 'flame',
+    inviteUrl: 'https://chat.whatsapp.com/Hv6LSL0y0Z04ZODzvAlgPd',
+    cta: 'Entrar no Radar de Ofertas',
+    enabled: true,
+    order: 1,
+  },
+  {
+    id: 'tecnologia',
+    name: 'Ofertas de Tecnologia',
+    description: 'Eletrônicos, acessórios, informática, gadgets e produtos inteligentes.',
+    icon: 'laptop',
+    inviteUrl: 'https://chat.whatsapp.com/CC4v27uoukuKeyEIAeOn57',
+    cta: 'Entrar no grupo de Tecnologia',
+    enabled: true,
+    order: 2,
+  },
+  {
+    id: 'esportes-e-fitness',
+    name: 'Esportes e Fitness',
+    description: 'Esportes, exercícios, atividades físicas, acessórios esportivos e bem-estar.',
+    icon: 'fitness',
+    inviteUrl: 'https://chat.whatsapp.com/ECCm9RHJNF04smRSx66cC0',
+    cta: 'Entrar no grupo de Esportes e Fitness',
+    enabled: true,
+    order: 3,
+  },
+  {
+    id: 'escolar-e-pedagogico',
+    name: 'Escolar e Pedagógico',
+    description: 'Materiais escolares, papelaria, recursos pedagógicos e organização dos estudos.',
+    icon: 'book',
+    inviteUrl: 'https://chat.whatsapp.com/BQNHvawkTSFF9JZKnppy7u',
+    cta: 'Entrar no grupo Escolar e Pedagógico',
+    enabled: true,
+    order: 4,
+  },
+  {
+    id: 'casa-e-estilo',
+    name: 'Ofertas Casa e Estilo',
+    description: 'Casa, decoração, cozinha, organização e utilidades domésticas.',
+    icon: 'home',
+    inviteUrl: 'https://chat.whatsapp.com/CygPqiCg21kFtgQZ7xB5LK',
+    cta: 'Entrar no grupo Casa e Estilo',
+    enabled: true,
+    order: 5,
+  },
+];

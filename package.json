@@ -1,0 +1,29 @@
+{
+  "name": "tendendo-landing-page",
+  "version": "1.0.0",
+  "description": "Landing page estática do Tendendo",
+  "scripts": {
+    "test": "node --test",
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "eslint ."
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.6",
+    "typescript": "6.0.3"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=24"
+  }
+}
