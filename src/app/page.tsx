@@ -7,21 +7,6 @@ import { affiliate, pricing, whatsappPrivacy } from '../data/site';
 
 export const metadata: Metadata = { alternates: { canonical: '/' } };
 
-const benefits = [
-  ['bag', 'Ofertas em um só lugar', 'Oportunidades de diferentes lojas.'],
-  ['grid', 'Grupos por interesse', 'Temas relevantes para você.'],
-  ['trend', 'Novidades e tendências', 'Produtos e tecnologias em destaque.'],
-  ['gift', 'Acesso gratuito', 'Sem mensalidade ou assinatura.'],
-  ['chat', 'Praticidade no WhatsApp', 'Conteúdos no aplicativo que você já usa.'],
-] as const;
-
-const steps = [
-  ['Escolha seu grupo', 'Explore as categorias.'],
-  ['Entre gratuitamente', 'Clique e participe pelo WhatsApp.'],
-  ['Descubra oportunidades', 'Acompanhe as ofertas e novidades compartilhadas.'],
-  ['Compre na loja parceira', 'Finalize diretamente no marketplace responsável.'],
-] as const;
-
 function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
@@ -79,20 +64,6 @@ export default function Home() {
               <p className="privacy-note"><Icon name="info" /><span>Os convites abrem o WhatsApp em nova aba. {whatsappPrivacy}</span></p>
             </>
           ) : <p>Os convites estão temporariamente indisponíveis.</p>}
-        </section>
-        <section className="benefits section" aria-labelledby="benefits-title">
-          <div className="wrap">
-            <h2 id="benefits-title">Por que acompanhar o Tendendo?</h2>
-            <ul className="benefit-grid">{benefits.map(([icon, title, text]) => (
-              <li key={icon}><span className="icon-tile"><Icon name={icon} /></span><h3>{title}</h3><p>{text}</p></li>
-            ))}</ul>
-          </div>
-        </section>
-        <section className="wrap section" id="como-funciona" aria-labelledby="steps-title">
-          <h2 id="steps-title">Como funciona</h2>
-          <ol className="steps">{steps.map(([title, text], index) => (
-            <li key={title}><span className="step-number" aria-hidden="true">{index + 1}</span><h3>{title}</h3><p>{text}</p></li>
-          ))}</ol>
         </section>
         <section className="about section" id="sobre" aria-labelledby="about-title">
           <div className="wrap about-inner">
