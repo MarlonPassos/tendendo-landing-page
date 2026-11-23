@@ -9,15 +9,17 @@ test('exporta a página completa e seus destinos internos', () => {
   const html = home();
   assert.match(html, /lang="pt-BR"/);
   assert.equal([...html.matchAll(/<h1[\s>]/g)].length, 1);
-  for (const id of ['grupos', 'como-funciona', 'sobre']) {
+  for (const id of ['grupos', 'sobre']) {
     assert.ok(html.includes(`id="${id}"`));
     assert.match(html, new RegExp(`href="/?#${id}"`));
   }
-  assert.equal([...html.matchAll(/href="#grupos"/g)].length, 5);
+  assert.equal([...html.matchAll(/href="#grupos"/g)].length, 6);
   assert.match(html, /Ofertas e achadinhos direto no seu WhatsApp/);
   assert.match(html, /data-analytics="hero_cta_click"/);
   assert.match(html, /data-analytics="final_cta_click"/);
   assert.match(html, /Ver grupos grátis/);
+  assert.match(html, /Voltar aos grupos/);
+  assert.doesNotMatch(html, /#como-funciona|benefits-title/);
   for (const route of ['politica-de-privacidade', 'termos-de-uso', 'links-de-afiliados']) {
     assert.ok(html.includes(`href="/${route}/"`));
     assert.match(read(`${route}/index.html`), /revisão jurídica/);

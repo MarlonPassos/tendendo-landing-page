@@ -1,6 +1,7 @@
 import { Mail } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { legalLinks, site } from '../data/site';
+import { BackToGroups } from './BackToGroups';
 
 function Logo() {
   /* The authorized raster is already sized and compressed for static serving. */
@@ -16,7 +17,6 @@ export function Header({ home = false }: { home?: boolean }) {
         <a href="/" className="brand"><Logo /></a>
         <nav aria-label="Navegação principal">
           <a href={`${prefix}#grupos`}>Grupos</a>
-          <a href={`${prefix}#como-funciona`}>Como funciona</a>
           <a href={`${prefix}#sobre`}>Sobre</a>
         </nav>
         <a href={`${prefix}#grupos`} className="button header-cta" data-dock-hide>Explorar grupos</a>
@@ -27,13 +27,16 @@ export function Header({ home = false }: { home?: boolean }) {
 
 const exploreLinks = [
   ['/#grupos', 'Grupos de ofertas'],
-  ['/#como-funciona', 'Como funciona'],
   ['/#sobre', 'Sobre o Tendendo'],
 ] as const;
 
-function FooterNav({ title, links }: { title: string; links: ReadonlyArray<readonly [string, string]> }) {
+function FooterNav({ title, links, className }: {
+  title: string;
+  links: ReadonlyArray<readonly [string, string]>;
+  className: string;
+}) {
   return (
-    <nav aria-label={title}>
+    <nav aria-label={title} className={className}>
       <h2>{title}</h2>
       <ul>
         {links.map(([href, label]) => <li key={href}><a href={href}>{label}</a></li>)}
@@ -70,23 +73,27 @@ export function Footer() {
               </FacebookLink>
             </div>
           </div>
-          <FooterNav title="Explore" links={exploreLinks} />
-          <FooterNav title="Informações" links={Object.entries(legalLinks).map(([slug, label]) => [`/${slug}/`, label])} />
+          <FooterNav className="footer-explore" title="Explore" links={exploreLinks} />
+          <FooterNav className="footer-legal" title="Informações" links={Object.entries(legalLinks).map(([slug, label]) => [`/${slug}/`, label])} />
           <div className="footer-contact">
             <h2>Contato</h2>
             <ul>
               <li>
-                <a href={`mailto:${site.email}`} className="footer-email">
-                  <Mail size={17} aria-hidden="true" />{site.email}
+                <a href={`mailto:${site.email}`} className="footer-email" aria-label={`Enviar e-mail para ${site.email}`}>
+                  <Mail size={17} aria-hidden="true" /><span>{site.email}</span>
                 </a>
               </li>
               <li><FacebookLink>Tendendo no Facebook</FacebookLink></li>
             </ul>
           </div>
         </div>
+        <div className="footer-back"><BackToGroups /></div>
         <div className="footer-bottom">
-          <p>© 2026 Tendendo.com. Todos os direitos reservados.</p>
-          <p>Podemos receber comissão por compras feitas por links de afiliados.</p>
+          <p>© 2026 Tendendo.com<span className="footer-desktop-copy">. Todos os direitos reservados.</span></p>
+          <p>
+            <span className="footer-desktop-copy">Podemos receber comissão por compras feitas por links de afiliados.</span>
+            <span className="footer-mobile-copy">Podemos receber comissões por links de afiliados.</span>
+          </p>
         </div>
       </div>
     </footer>
