@@ -1,7 +1,7 @@
 type Attribution = Partial<Record<'source' | 'medium' | 'campaign', string>>;
 
 export type AnalyticsEvent = (
-  | { name: 'page_view' | 'hero_cta_click' | 'final_cta_click' }
+  | { name: 'page_view' | 'hero_cta_click' | 'final_cta_click' | 'dock_cta_click' | 'hero_radar_click' }
   | { name: 'group_click'; group_id: string; group_name: string }
 ) & Attribution;
 
