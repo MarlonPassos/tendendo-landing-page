@@ -19,6 +19,7 @@ export function LandingInteractions({ hasGroups }: { hasGroups: boolean }) {
   const consent = useRef(false);
   const [preference, setPreference] = useState<string | null>(null);
   const [privacySignal, setPrivacySignal] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);
@@ -94,6 +95,7 @@ export function LandingInteractions({ hasGroups }: { hasGroups: boolean }) {
 
     const loadPreference = metaPixelId ? window.setTimeout(() => {
       setPrivacySignal(optedOut);
+      setLoaded(true);
       applyPreference(readPreference());
     }, 0) : undefined;
     if (!pageViewed.current) {
@@ -125,6 +127,15 @@ export function LandingInteractions({ hasGroups }: { hasGroups: boolean }) {
 
   return (
     <>
+      {metaPixelId && loaded && !privacySignal && preference === null && (
+        <div className="consent-banner" role="region" aria-label="Preferências de privacidade">
+          <p>Posso usar cookies da Meta para medir o desempenho dos nossos anúncios? É opcional. <a href="/politica-de-privacidade/">Saiba mais</a></p>
+          <div className="consent-actions">
+            <button className="button secondary" type="button" onClick={() => choose('denied')}>Recusar</button>
+            <button className="button primary" type="button" onClick={() => choose('granted')}>Aceitar</button>
+          </div>
+        </div>
+      )}
       {metaPixelId && (
         <section className="wrap tracking-preferences" id="preferencias-de-privacidade" aria-labelledby="tracking-title">
           <h2 id="tracking-title">Preferências de privacidade</h2>

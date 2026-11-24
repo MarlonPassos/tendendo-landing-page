@@ -53,4 +53,8 @@ export function trackMeta(event: AnalyticsEvent) {
   const { name, ...properties } = event;
   if (name === 'page_view') browser().fbq?.('trackSingle', metaPixelId, 'PageView', properties);
   else browser().fbq?.('trackSingleCustom', metaPixelId, name, properties);
+  if (name === 'group_click') {
+    // Evento padrão da Meta para otimizar anúncios pela conversão principal.
+    browser().fbq?.('trackSingle', metaPixelId, 'Lead', { content_name: event.group_name, content_category: event.group_id });
+  }
 }
