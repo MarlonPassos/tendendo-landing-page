@@ -56,6 +56,17 @@ function FacebookLink({ children, iconOnly }: { children: ReactNode; iconOnly?: 
   );
 }
 
+function InstagramLink({ children, iconOnly }: { children: ReactNode; iconOnly?: boolean }) {
+  return (
+    <a href={site.instagram} target="_blank" rel="noopener noreferrer"
+      className={iconOnly ? 'footer-social' : undefined}
+      aria-label={iconOnly ? 'Tendendo no Instagram (abre em nova aba)' : undefined}>
+      {children}
+      {!iconOnly && <span className="sr-only"> (abre em nova aba)</span>}
+    </a>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="footer" id="rodape">
@@ -71,6 +82,13 @@ export function Footer() {
                   <path d="M14 22v-9h3l.5-3H14V8c0-1 .3-2 2-2h2V3.3C17.5 3.1 16.5 3 15.4 3 12.6 3 11 4.7 11 7.7V10H8v3h3v9z" />
                 </svg>
               </FacebookLink>
+              <InstagramLink iconOnly>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </InstagramLink>
             </div>
           </div>
           <FooterNav className="footer-explore" title="Explore" links={exploreLinks} />
@@ -84,6 +102,7 @@ export function Footer() {
                 </a>
               </li>
               <li><FacebookLink>Tendendo no Facebook</FacebookLink></li>
+              <li><InstagramLink>Tendendo no Instagram</InstagramLink></li>
             </ul>
           </div>
         </div>
