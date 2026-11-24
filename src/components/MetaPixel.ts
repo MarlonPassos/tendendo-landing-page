@@ -1,4 +1,5 @@
 import type { AnalyticsEvent } from '../data/analytics';
+import { metaPixelId } from '../data/site';
 
 type Pixel = ((...args: unknown[]) => void) & {
   callMethod?: (...args: unknown[]) => void;
@@ -10,9 +11,7 @@ type Pixel = ((...args: unknown[]) => void) & {
 
 const browser = () => window as Window & { fbq?: Pixel; _fbq?: Pixel };
 
-export const metaPixelId = /^\d+$/.test(process.env.NEXT_PUBLIC_META_PIXEL_ID || '')
-  ? process.env.NEXT_PUBLIC_META_PIXEL_ID
-  : undefined;
+export { metaPixelId };
 
 export function grantMetaConsent() {
   if (!metaPixelId) return;

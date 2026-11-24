@@ -42,7 +42,7 @@ A camada DOM emite `page_view`, `group_click`, `hero_cta_click` e `final_cta_cli
 - Meios aceitos: `paid`, `paid_social`, `social`, `cpc` e `cpm`.
 - Para incluir nomes de campanhas, configure `NEXT_PUBLIC_ALLOWED_CAMPAIGNS` com valores separados por vírgula. Use identificadores sem dados pessoais.
 
-O Meta Pixel fica desativado por padrão. Para disponibilizá-lo, preencha `NEXT_PUBLIC_META_PIXEL_ID` com o ID numérico real e execute um novo build. O SDK só carrega após autorização em **Preferências de privacidade**, na página inicial. O visitante pode recusar ou revogar no mesmo lugar. Global Privacy Control e Do Not Track desativam o envio. Quando autorizado, o SDK da Meta pode processar a URL da página e cookies próprios conforme as políticas da Meta. Os eventos da aplicação não incluem `fbclid`, `utm_content`, `utm_term`, dados de contato ou o convite do WhatsApp.
+O Meta Pixel usa o ID padrão definido em `src/data/site.ts` (o ID do Pixel é público); `NEXT_PUBLIC_META_PIXEL_ID` pode sobrescrevê-lo em outro ambiente, com um novo build. O SDK só carrega após autorização no aviso exibido na primeira visita ou em **Preferências de privacidade**, na página inicial. O visitante pode recusar ou revogar a qualquer momento. Global Privacy Control e Do Not Track desativam o envio. Quando autorizado, o SDK da Meta pode processar a URL da página e cookies próprios conforme as políticas da Meta. Os eventos da aplicação não incluem `fbclid`, `utm_content`, `utm_term`, dados de contato ou o convite do WhatsApp.
 
 A camada DOM também é o ponto de integração para GA4. Qualquer adaptador futuro deve obedecer ao consentimento e evitar duplicação. A medição conta visualizações e cliques. A entrada efetiva no grupo requer confirmação independente.
 

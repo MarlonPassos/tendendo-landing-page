@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Header } from '../../components/Shell';
 import { notFound } from 'next/navigation';
-import { affiliate, legalLinks, pricing, site, whatsappPrivacy } from '../../data/site';
+import { affiliate, legalLinks, metaPixelId, pricing, site, whatsappPrivacy } from '../../data/site';
 
 const pages = {
   'politica-de-privacidade': [
@@ -51,7 +51,7 @@ export default async function LegalPage({ params }: Props) {
         {pages[slug].map(([title, body]) => (
           <section key={title}><h2>{title}</h2><p>{body}</p></section>
         ))}
-        {slug === 'politica-de-privacidade' && /^\d+$/.test(process.env.NEXT_PUBLIC_META_PIXEL_ID || '') && (
+        {slug === 'politica-de-privacidade' && metaPixelId && (
           <p><a href="/#preferencias-de-privacidade">Alterar preferências de privacidade</a></p>
         )}
         <p>Dúvidas? <a href={`mailto:${site.email}`}>{site.email}</a></p>

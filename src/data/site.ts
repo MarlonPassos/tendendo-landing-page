@@ -15,3 +15,7 @@ export const legalLinks = {
 export const affiliate = 'Alguns links compartilhados são links de afiliados. Podemos receber comissão por compras elegíveis, sem custo adicional decorrente dessa comissão para você.';
 export const pricing = 'Preços, disponibilidade, frete e promoções podem mudar sem aviso prévio. Confirme as condições finais na loja responsável.';
 export const whatsappPrivacy = 'A participação é gratuita e voluntária. Ao entrar, outros participantes podem ver seu número ou informações do seu perfil, conforme as configurações do WhatsApp.';
+
+// O ID do Pixel é público (vai no JavaScript do site). A variável de ambiente pode sobrescrevê-lo, por exemplo em outro ambiente.
+const configuredPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID || '1703773054594801';
+export const metaPixelId = /^\d+$/.test(configuredPixelId) ? configuredPixelId : undefined;
