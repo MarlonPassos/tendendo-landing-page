@@ -5,7 +5,7 @@ import { affiliate, legalLinks, pricing, site, whatsappPrivacy } from '../../dat
 
 const pages = {
   'politica-de-privacidade': [
-    ['Navegação e campanhas', 'A página lê os parâmetros da URL durante a visita. Os eventos locais registram visualizações e cliques, incluindo o grupo escolhido e a origem, o meio e a campanha reconhecidos. Um clique no convite não confirma a entrada no grupo. Quando a medição com a Meta está disponível, ela só é ativada após a sua autorização nas Preferências de privacidade da página inicial. O serviço da Meta pode processar cookies, a URL visitada e informações do navegador de acordo com suas políticas. Sua escolha fica salva no navegador e pode ser alterada na página inicial.'],
+    ['Navegação e campanhas', 'A página lê os parâmetros da URL durante a visita. Os eventos locais registram visualizações e cliques, incluindo o grupo escolhido e a origem, o meio e a campanha reconhecidos. Um clique no convite não confirma a entrada no grupo. Quando a medição com a Meta está disponível, ela só é ativada após a sua autorização, pedida em um aviso na primeira visita e disponível nas Preferências de privacidade da página inicial. O serviço da Meta pode processar cookies, a URL visitada e informações do navegador de acordo com suas políticas. Sua escolha fica salva no navegador e pode ser alterada na página inicial.'],
     ['WhatsApp e marketplaces', whatsappPrivacy + ' O WhatsApp e os marketplaces têm suas próprias políticas de privacidade.'],
     ['Contato', 'Ao entrar em contato por e-mail, você compartilha seu endereço e o conteúdo da mensagem para que possamos responder.'],
   ],
