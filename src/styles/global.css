@@ -159,12 +159,37 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .tracking-preferences h2 { font-size: 1.25rem; margin-bottom: .5rem; }
 .tracking-preferences .actions { margin-block: .7rem; }
 .mobile-dock { display: none; }
+.hero .hero-copy > .hero-badge { display: inline-flex; align-items: center; gap: .5rem; margin: 0 0 1rem; padding: .35rem .8rem; border: 1px solid #1f5a37; border-radius: 99px; background: #0e2417; color: #a9f5c1; font-size: .8rem; font-weight: 700; }
+.live-dot { width: .55rem; height: .55rem; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 0 #4ade8099; animation: ping 1.8s ease-out infinite; }
+.trust-chips { display: flex; flex-wrap: wrap; gap: .4rem .5rem; margin-top: 1.1rem; }
+.trust-chips li { display: inline-flex; align-items: center; gap: .35rem; padding: .25rem .65rem; border: 1px solid var(--line); border-radius: 99px; background: #ffffff08; color: var(--muted); font-size: .8rem; font-weight: 600; }
+.trust-chips svg { width: .95rem; height: .95rem; color: #4ade80; }
+.cta-pulse, .dock-button { box-shadow: 0 .5rem 1.6rem #4ade8038; animation: glow 2.4s ease-in-out infinite; }
+.hero-art img { animation: float 5s ease-in-out infinite; }
+.card-badge { position: absolute; top: 1rem; right: 1rem; padding: .2rem .6rem; border-radius: 99px; background: var(--amber); color: #171004; font-size: .72rem; font-weight: 800; }
+.group-card { position: relative; }
+.group-card:hover { transform: translateY(-3px); }
+.group-card { transition: border-color .18s, transform .18s; }
+.group-card .button:hover { box-shadow: 0 .4rem 1.2rem #4ade8040; }
+.final-cta .button { min-height: 3.4rem; font-size: 1.02rem; padding-inline: 1.6rem; animation: glow 2.4s ease-in-out infinite; }
+.direct-link { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; margin-top: .4rem; color: #a9f5c1; font-size: .92rem; font-weight: 700; text-decoration: none; }
+.direct-link:hover { text-decoration: underline; }
+.offer-preview { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(1.4rem, 5vw, 4rem); align-items: center; }
+.preview-copy p:not(.eyebrow) { margin-top: .7rem; max-width: 52ch; }
+.shots { display: flex; gap: 1rem; align-items: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; padding: .5rem .25rem 1rem; scrollbar-width: thin; }
+.shots li { flex: 0 0 min(72%, 17rem); scroll-snap-align: center; }
+.shots img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 1rem 2.4rem #0009; }
+@keyframes ping { 70%, 100% { box-shadow: 0 0 0 .55rem #4ade8000; } }
+@keyframes glow { 50% { box-shadow: 0 .5rem 2.2rem #4ade8070; } }
+@keyframes float { 50% { transform: translateY(-.55rem); } }
+@keyframes dock-in { from { transform: translateY(110%); } }
 .legal { max-width: 48rem; }
 .legal h1 { font-size: clamp(2rem,6vw,4rem); margin: 1.2rem 0; }
 .legal section { margin: 1.6rem 0; }
 .legal h2 { font-size: 1.5rem; margin-bottom: .4rem; }
 .review { color: #ffbd69; }
 @media (max-width: 900px) {
+  .offer-preview { grid-template-columns: 1fr; }
   .hero-inner { min-height: auto; }
   .hero-art img { width: min(83%, 15.625rem); }
   .group-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
@@ -185,15 +210,20 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   .actions { margin-top: 1.1rem; }
   .group-grid { grid-template-columns: 1fr; }
   html { scroll-padding-bottom: calc(4.5rem + env(safe-area-inset-bottom)); }
+  body { padding-bottom: calc(4.75rem + env(safe-area-inset-bottom)); }
   .mobile-dock:not([hidden]) {
     display: grid;
     position: fixed;
     z-index: 5;
     inset: auto 0 0;
-    padding: .6rem max(1.125rem, env(safe-area-inset-right)) calc(.6rem + env(safe-area-inset-bottom)) max(1.125rem, env(safe-area-inset-left));
-    background: #101012;
-    border-top: 1px solid var(--line);
+    padding: .65rem max(1.125rem, env(safe-area-inset-right)) calc(.65rem + env(safe-area-inset-bottom)) max(1.125rem, env(safe-area-inset-left));
+    background: #101012f2;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #1f5a37;
+    box-shadow: 0 -.6rem 1.6rem #000a;
+    animation: dock-in .3s ease-out;
   }
+  .dock-button { min-height: 3.25rem; font-size: 1rem; }
   .about-inner { grid-template-columns: 1fr; }
 }
 @media (min-width: 901px) {
@@ -243,5 +273,5 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { transition: none !important; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }

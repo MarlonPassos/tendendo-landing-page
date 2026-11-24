@@ -12,6 +12,7 @@ const paths = {
   whatsapp: 'M21 11.5a9 9 0 0 1-9 9 9 9 0 0 1-4-.9L3 21l1.3-4.8A9 9 0 1 1 21 11.5ZM9 8c-2 1 1 6 4 7 1 .5 2 0 2.5-1l-2-1-1 1c-2-1-3-2-3.5-3.5l1-1-1-2Z',
   info: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-11v6m0-10v.1',
   check: 'm5 12 4 4L19 6',
+  arrowUp: 'M12 19V5m-6 6 6-6 6 6',
 };
 
 export function Icon({ name }: { name: keyof typeof paths }) {

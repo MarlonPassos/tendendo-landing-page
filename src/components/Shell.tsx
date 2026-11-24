@@ -19,7 +19,7 @@ export function Header({ home = false }: { home?: boolean }) {
           <a href={`${prefix}#grupos`}>Grupos</a>
           <a href={`${prefix}#sobre`}>Sobre</a>
         </nav>
-        <a href={`${prefix}#grupos`} className="button header-cta" data-dock-hide>Explorar grupos</a>
+        <a href={`${prefix}#grupos`} className="button header-cta">Explorar grupos</a>
       </div>
     </header>
   );
@@ -58,7 +58,7 @@ function FacebookLink({ children, iconOnly }: { children: ReactNode; iconOnly?: 
 
 export function Footer() {
   return (
-    <footer className="footer" id="rodape" data-dock-hide>
+    <footer className="footer" id="rodape">
       <div className="wrap">
         <div className="footer-inner">
           <div className="footer-brand">

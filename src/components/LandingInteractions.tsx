@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { emitAnalytics, eventAttribution, readCampaign, type AnalyticsEvent } from '../data/analytics';
+import { Icon } from './Icon';
 import { grantMetaConsent, metaPixelId, revokeMetaConsent, trackMeta } from './MetaPixel';
 
 const preferenceKey = 'tendendo:marketing-consent:v1';
@@ -31,17 +32,20 @@ export function LandingInteractions({ hasGroups }: { hasGroups: boolean }) {
       selected.scrollIntoView({ behavior: 'instant', block: 'start' });
     }
 
+    // O dock fica visível depois que a pessoa passa da grade de grupos e continua até o fim da página.
     const currentDock = dock.current;
-    const blockers = Array.from(document.querySelectorAll('[data-dock-hide]'));
-    const visible = new Set<Element>();
-    const observer = currentDock && new IntersectionObserver(entries => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) visible.add(entry.target);
-        else visible.delete(entry.target);
-      }
-      currentDock.hidden = visible.size > 0;
-    });
-    if (observer) blockers.forEach(element => observer.observe(element));
+    const groupList = document.querySelector('[data-dock-after]');
+    let frame = 0;
+    function updateDock() {
+      frame = 0;
+      if (currentDock && groupList) currentDock.hidden = groupList.getBoundingClientRect().bottom > 0;
+    }
+    function scheduleDock() {
+      if (!frame) frame = requestAnimationFrame(updateDock);
+    }
+    updateDock();
+    window.addEventListener('scroll', scheduleDock, { passive: true });
+    window.addEventListener('resize', scheduleDock);
 
     function publish(event: AnalyticsEvent) {
       const enriched = { ...event, ...attribution };
@@ -85,7 +89,7 @@ export function LandingInteractions({ hasGroups }: { hasGroups: boolean }) {
       const name = link?.dataset.groupName;
       const action = link?.dataset.analytics;
       if (id && name) publish({ name: 'group_click', group_id: id, group_name: name });
-      if (action === 'hero_cta_click' || action === 'final_cta_click') publish({ name: action });
+      if (action === 'hero_cta_click' || action === 'final_cta_click' || action === 'dock_cta_click' || action === 'hero_radar_click') publish({ name: action });
     }
 
     const loadPreference = metaPixelId ? window.setTimeout(() => {
@@ -102,7 +106,9 @@ export function LandingInteractions({ hasGroups }: { hasGroups: boolean }) {
     window.addEventListener('storage', handleStorage);
     window.addEventListener(preferenceKey, handlePreference);
     return () => {
-      observer?.disconnect();
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', scheduleDock);
+      window.removeEventListener('resize', scheduleDock);
       window.clearTimeout(loadPreference);
       document.removeEventListener('click', handleClick);
       document.removeEventListener('auxclick', handleClick);
@@ -120,7 +126,7 @@ export function LandingInteractions({ hasGroups }: { hasGroups: boolean }) {
   return (
     <>
       {metaPixelId && (
-        <section className="wrap tracking-preferences" id="preferencias-de-privacidade" data-dock-hide aria-labelledby="tracking-title">
+        <section className="wrap tracking-preferences" id="preferencias-de-privacidade" aria-labelledby="tracking-title">
           <h2 id="tracking-title">Preferências de privacidade</h2>
           <p>A medição de campanhas com a Meta é opcional. Você pode alterar sua escolha aqui a qualquer momento.</p>
           {privacySignal ? <p>Seu navegador indica que você prefere desativar o rastreamento.</p> : (
@@ -136,7 +142,9 @@ export function LandingInteractions({ hasGroups }: { hasGroups: boolean }) {
       )}
       {hasGroups && (
         <div className="mobile-dock" ref={dock} hidden>
-          <a className="button primary" href="#grupos" onClick={() => document.getElementById('grupos')?.focus({ preventScroll: true })}>Ver grupos grátis</a>
+          <a className="button whatsapp dock-button" href="#grupos" data-analytics="dock_cta_click" onClick={() => document.getElementById('grupos')?.focus({ preventScroll: true })}>
+            <Icon name="whatsapp" /><span>Ver grupos grátis</span><Icon name="arrowUp" />
+          </a>
         </div>
       )}
     </>
