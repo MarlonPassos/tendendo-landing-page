@@ -191,8 +191,9 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .legal { max-width: 48rem; }
 .legal h1 { font-size: clamp(2rem,6vw,4rem); margin: 1.2rem 0; }
 .legal section { margin: 1.6rem 0; }
-.legal h2 { font-size: 1.5rem; margin-bottom: .4rem; }
+.legal h2 { font-size: 1.5rem; margin-bottom: .4rem; max-width: none; }
 .review { color: #ffbd69; }
+.updated { font-size: .9rem; }
 @media (max-width: 900px) {
   .offer-preview { grid-template-columns: 1fr; }
   .hero-inner { min-height: auto; }
