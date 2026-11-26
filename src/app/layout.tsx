@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   title: { default: site.title, template: '%s | Tendendo' },
   description: site.description,
   icons: { icon: '/assets/favicon.png' },
+  // Verificação do domínio no Meta Business (Segurança da marca → Domínios).
+  other: { 'facebook-domain-verification': '4wjyib1s77sgtvq99he40o8xychu9d' },
   openGraph: {
     type: 'website', locale: 'pt_BR', siteName: 'Tendendo', title: site.title,
     description: site.description,
